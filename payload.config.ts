@@ -7,7 +7,7 @@ import { account, session, user, verification } from "./src/lib/db/schema";
 export default buildConfig({
   editor: lexicalEditor(),
   collections: [],
-  
+
   secret: process.env.PAYLOAD_SECRET || "",
   db: sqliteAdapter({
     client: {
