@@ -8,7 +8,7 @@ export async function drizzleTest() {
   const newUser: typeof user.$inferInsert = {
     name: "John",
     email: "john@example.com",
-    id: crypto.randomUUID()
+    id: crypto.randomUUID(),
   };
 
   await db.insert(user).values(newUser);
@@ -28,7 +28,7 @@ export async function drizzleTest() {
   await db
     .update(user)
     .set({
-      name: "Richard"
+      name: "Richard",
     })
     .where(eq(user.email, newUser.email));
   console.log("User info updated!");
