@@ -23,6 +23,7 @@ export function LogInButton({ ...props }: ComponentProps<typeof Button>) {
   const [state, formAction] = useActionState(login, {});
 
   useEffect(() => {
+    console.debug('log-in-button.tsx:26 > state', state.success);
     if (state.success) router.refresh();
   }, [state.success, router]);
 

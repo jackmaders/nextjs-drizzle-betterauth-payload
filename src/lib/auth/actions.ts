@@ -3,7 +3,7 @@
 import { constants } from "node:http2";
 import { revalidatePath } from "next/cache";
 import { headers } from "next/headers";
-import { api } from "./index";
+import { getBetterAuthApi } from ".";
 import type { ActionResult } from "./types";
 
 export async function login(
@@ -20,7 +20,7 @@ export async function login(
     return { error: "Password is required" };
   }
 
-  const response = await api.signInEmail({
+  const response = await (await getBetterAuthApi()).signInEmail({
     body: {
       email,
       password,
@@ -69,7 +69,7 @@ export async function signup(
     return { error: "Password must be at least 8 characters long" };
   }
 
-  const response = await api.signUpEmail({
+  const response = await (await getBetterAuthApi()).signUpEmail({
     body: {
       email,
       password,
@@ -96,7 +96,7 @@ export async function logout(
   _prevState: ActionResult,
   _formData: FormData,
 ): Promise<ActionResult> {
-  const response = await api.signOut({
+  const response = await (await getBetterAuthApi()).signOut({
     headers: await headers(),
     asResponse: true,
   });

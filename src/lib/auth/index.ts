@@ -1,20 +1,15 @@
-import { betterAuth } from "better-auth";
-import { drizzleAdapter } from "better-auth/adapters/drizzle";
-import { nextCookies } from "better-auth/next-js";
-import { db } from "@/lib/db";
-import { account, session, user, verification } from "../db/schema";
+import { type BasePayload, getPayload } from "payload";
+import type { BetterAuthReturn } from "payload-auth/better-auth";
+import config, { type BetterAuthPluginsType } from "../../../payload.config";
 
-const { api, $Infer } = betterAuth({
-  database: drizzleAdapter(db, {
-    provider: "sqlite",
-    schema: { user, account, session, verification },
-  }),
-  emailAndPassword: {
-    enabled: true,
-  },
-  plugins: [nextCookies()],
-});
+export type Payload = BasePayload & {
+  betterAuth: BetterAuthReturn<BetterAuthPluginsType>;
+};
 
-type Session = typeof $Infer.Session;
+export async function getBetterAuthApi() {
+  const payload = (await getPayload({ config })) as Payload;
+  return payload.betterAuth.api;
+}
 
-export { api, type Session };
+
+export type Session = Awaited<ReturnType<(Awaited<ReturnType<typeof getBetterAuthApi>>)["getSession"]>>;
