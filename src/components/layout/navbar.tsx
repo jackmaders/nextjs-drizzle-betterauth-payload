@@ -23,9 +23,15 @@ export function Navbar({ session }: NavbarProps) {
   return (
     <header>
       <div className="container flex justify-between py-2 items-center">
-        <Link className={"text-2xl font-bold"} href="/">
-          OWTV Test App
-        </Link>
+        <div className="flex gap-4 items-center">
+          <Link className={"text-2xl font-bold"} href="/">
+            OWTV Test App
+          </Link>
+          <div className="flex items-center gap-2">
+          <Link href="/teams">Teams</Link>
+          <Link href="/admin">Admin</Link>
+          </div>
+        </div>
 
         <MobileMenu session={session} className="md:hidden" />
         <div className="max-md:hidden flex gap-2 items-center">
@@ -40,7 +46,7 @@ function MobileMenu({
   session,
   ...props
 }: HTMLAttributes<HTMLDivElement> & NavbarProps) {
-  console.debug('navbar.tsx:43 > session', session);
+  console.debug("navbar.tsx:43 > session", session);
 
   return (
     <div {...props}>

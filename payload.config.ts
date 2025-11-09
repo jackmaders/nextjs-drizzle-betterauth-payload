@@ -7,6 +7,8 @@ import {
   betterAuthPlugin,
 } from "payload-auth/better-auth";
 import sharp from "sharp";
+import { Players } from "@/collections/Players";
+import { Teams } from "@/collections/Teams";
 
 const betterAuthOptions: BetterAuthPluginOptions["betterAuthOptions"] = {
   emailAndPassword: {
@@ -32,7 +34,7 @@ export type BetterAuthPluginsType = typeof betterAuthPlugins;
 
 export default buildConfig({
   editor: lexicalEditor(),
-  collections: [],
+  collections: [Players, Teams],
   secret: process.env.PAYLOAD_SECRET || "",
   db: sqliteAdapter({
     client: {
@@ -79,6 +81,6 @@ export default buildConfig({
     }),
   ],
   typescript: {
-    outputFile: "src/lib/db/types.ts"
-  }
+    outputFile: "src/lib/db/types.ts",
+  },
 });
