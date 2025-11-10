@@ -46,8 +46,6 @@ function MobileMenu({
   session,
   ...props
 }: HTMLAttributes<HTMLDivElement> & NavbarProps) {
-  console.debug("navbar.tsx:43 > session", session);
-
   return (
     <div {...props}>
       <Sheet>

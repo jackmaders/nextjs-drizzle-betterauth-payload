@@ -13,7 +13,8 @@
       "!.next",
       "!dist",
       "!build",
-      "!payload-types.ts"
+      "!src/lib/db/types.ts",
+      "!cloudflare-env.d.ts"
     ]
   },
   "formatter": {
